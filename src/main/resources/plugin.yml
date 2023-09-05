@@ -1,0 +1,4 @@
+name: XL-Mine
+version: '${project.version}'
+main: me.xlucash.xlmine.MineMain
+api-version: '1.19'
