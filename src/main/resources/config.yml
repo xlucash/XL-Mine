@@ -1,0 +1,17 @@
+world-name: 'mining-world'
+backpack-capacity: 50000
+coal-amount:
+  min: 50
+  max: 250
+coal-price:
+  min: 5
+  max: 15
+
+database:
+  type: 'SQLite'
+  mysql:
+    host: 'localhost'
+    port: 3306
+    database: 'minecraft'
+    username: 'root'
+    password: 'password'
