@@ -20,6 +20,10 @@ public class ConfigManager {
         plugin.reloadConfig();
     }
 
+    public String getWorldName() {
+        return config.getString("world-name");
+    }
+
     public String getDatabaseType() {
         return config.getString("database.type");
     }
@@ -42,5 +46,25 @@ public class ConfigManager {
 
     public String getMySQLPassword() {
         return config.getString("database.mysql.password");
+    }
+
+    public int getMaxBackpackCapacity() {
+        return config.getInt("backpack-capacity");
+    }
+
+    public int getMinCoalDrop() {
+        return config.getInt("coal-amount.min");
+    }
+
+    public int getMaxCoalDrop() {
+        return config.getInt("coal-amount.max");
+    }
+
+    public int getMinCoalPrice() {
+        return config.getInt("coal-price.min");
+    }
+
+    public int getMaxCoalPrice() {
+        return config.getInt("coal-price.max");
     }
 }
