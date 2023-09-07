@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class BackpackGUI {
@@ -21,11 +22,12 @@ public class BackpackGUI {
     private BukkitTask refreshTask;
     private Inventory inv;
     private Player currentPlayer;
+    private static final DecimalFormat df = new DecimalFormat("0.000");
 
     public BackpackGUI(DatabaseManager databaseManager, ConfigManager configManager) {
         this.databaseManager = databaseManager;
         this.configManager = configManager;
-        this.inv = Bukkit.createInventory(null, 27, "Plecak z weglem");
+        this.inv = Bukkit.createInventory(null, 27, "§fPlecak gornika");
     }
 
     public void open(Player player) {
@@ -54,21 +56,32 @@ public class BackpackGUI {
         ItemMeta meta = backpackItem.getItemMeta();
         if (meta != null) {
             meta.setDisplayName("§7Twój plecak");
-            meta.setLore(Arrays.asList("§fZapełnienie: §a" + (double) coalAmount/1000 + "kg §f/ §a" + (double) configManager.getMaxBackpackCapacity()/1000 + "kg"));
+            meta.setLore(Arrays.asList("§fZapełnienie plecaka: §a" + (double) coalAmount/1000 + "kg§f/§a" + (double) configManager.getMaxBackpackCapacity()/1000 + "kg"));
             backpackItem.setItemMeta(meta);
         }
 
         ItemStack sellButton = new ItemStack(Material.GOLD_INGOT);
         ItemMeta sellMeta = sellButton.getItemMeta();
         if (sellMeta != null) {
-            sellMeta.setDisplayName("§fSprzedaj węgiel");
+            sellMeta.setDisplayName("§6Sprzedaj węgiel");
             double pricePerKg = CoalPriceManager.getCurrentPrice();
             double totalPrice = coalAmount / 1000.0 * pricePerKg;
-            sellMeta.setLore(Arrays.asList("§fCena za kg: " + CoalPriceManager.getCurrentPrice() + "$", "§fCałkowita cena: " + totalPrice + "$", "§fNastępna aktualizacja za: " + CoalPriceManager.getTimeUntilNextUpdate()));
+            sellMeta.setLore(Arrays.asList("§fCena za kg: §6" + CoalPriceManager.getCurrentPrice() + "$", "§fCałkowita cena: §a" + df.format(totalPrice) + "$", "§fNastępna aktualizacja za: §e" + CoalPriceManager.getTimeUntilNextUpdate()));
             sellButton.setItemMeta(sellMeta);
         }
 
-        inv.setItem(13, backpackItem);
-        inv.setItem(15, sellButton);
+        inv.setItem(12, backpackItem);
+        inv.setItem(14, sellButton);
+
+        ItemStack blackGlassPane = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+        ItemMeta glassMeta = blackGlassPane.getItemMeta();
+        glassMeta.setDisplayName(" ");
+        blackGlassPane.setItemMeta(glassMeta);
+
+        for (int i = 0; i < inv.getSize(); i++) {
+            if (inv.getItem(i) == null) {
+                inv.setItem(i, blackGlassPane);
+            }
+        }
     }
 }

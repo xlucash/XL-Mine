@@ -3,6 +3,8 @@ package me.xlucash.xlmine.listeners;
 import me.xlucash.xlmine.MineMain;
 import me.xlucash.xlmine.config.ConfigManager;
 import me.xlucash.xlmine.database.DatabaseManager;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -47,9 +49,9 @@ public class BlockBreakListener implements Listener {
             UUID playerUUID = event.getPlayer().getUniqueId();
             int coalAmount = new Random().nextInt(configManager.getMinCoalDrop(), configManager.getMaxCoalDrop());
             if(databaseManager.addCoalToPlayer(playerUUID, coalAmount)) {
-                event.getPlayer().sendMessage("§fOtrzymałeś §a" + coalAmount + "g §fwęgla!");
+                event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§fWydobyłeś §a" + coalAmount + "g §fwęgla!"));
             } else {
-                event.getPlayer().sendMessage("§cTwój plecak jest pełen! Sprzedaj jego zawartość, aby kopać dalej!");
+                event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§cTwój plecak jest pełen! Sprzedaj jego zawartość, aby kopać dalej!"));
             }
 
             Bukkit.getScheduler().runTaskLater(plugin, () -> {

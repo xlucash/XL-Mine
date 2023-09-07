@@ -5,4 +5,11 @@ api-version: '1.19'
 commands:
   gornik:
     description: Gornik plugin
-    usage: /<command>
+    usage: /<command> [reload]
+permissions:
+  mine.reload:
+      description: Uprawnienie do przeladowania pluginu.
+      default: op
+depend:
+  - SuperiorSkyblock2
+  - PlaceholderAPI

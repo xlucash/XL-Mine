@@ -3,6 +3,7 @@ package me.xlucash.xlmine;
 import me.xlucash.xlmine.commands.MineCommand;
 import me.xlucash.xlmine.config.ConfigManager;
 import me.xlucash.xlmine.database.DatabaseManager;
+import me.xlucash.xlmine.hooks.PlaceholderAPIHook;
 import me.xlucash.xlmine.hooks.VaultHook;
 import me.xlucash.xlmine.listeners.BlockBreakListener;
 import me.xlucash.xlmine.listeners.BlockPlaceListener;
@@ -15,6 +16,7 @@ public final class MineMain extends JavaPlugin {
     private ConfigManager configManager;
     private DatabaseManager databaseManager;
     private VaultHook vaultHook;
+    private PlaceholderAPIHook placeholderAPIHook;
     private CoalPriceManager coalPriceManager;
 
     @Override
@@ -26,6 +28,9 @@ public final class MineMain extends JavaPlugin {
 
         vaultHook = new VaultHook();
         vaultHook.setupEconomy();
+
+        placeholderAPIHook = new PlaceholderAPIHook(this);
+        placeholderAPIHook.register();
 
         coalPriceManager = new CoalPriceManager(configManager, this, databaseManager);
 
@@ -42,5 +47,13 @@ public final class MineMain extends JavaPlugin {
         if(databaseManager != null) {
             databaseManager.closeDatabaseConnection();
         }
+    }
+
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
     }
 }

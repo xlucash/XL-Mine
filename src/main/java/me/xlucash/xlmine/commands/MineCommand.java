@@ -34,10 +34,10 @@ public class MineCommand implements CommandExecutor {
             configManager.reloadConfig();
             player.sendMessage("§a[XL-Mine] §fPlugin reloaded!");
             Bukkit.getServer().getConsoleSender().sendMessage("§a[XL-Mine] §fPlugin reloaded!");
+            return true;
         } else {
             new BackpackGUI(databaseManager, configManager).open((Player) commandSender);
             return true;
         }
-        return false;
     }
 }

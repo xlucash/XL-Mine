@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ConfirmationGUI {
     public static void openFor(Player player) {
-        Inventory inv = Bukkit.createInventory(null, 27, "Potwierdzenie sprzedazy");
+        Inventory inv = Bukkit.createInventory(null, 27, "§fPotwierdzenie sprzedazy");
 
         ItemStack confirmButton = new ItemStack(Material.GREEN_WOOL);
         ItemMeta confirmMeta = confirmButton.getItemMeta();
@@ -25,8 +25,19 @@ public class ConfirmationGUI {
             cancelButton.setItemMeta(cancelMeta);
         }
 
-        inv.setItem(11, confirmButton);
-        inv.setItem(15, cancelButton);
+        inv.setItem(12, confirmButton);
+        inv.setItem(14, cancelButton);
+
+        ItemStack blackGlassPane = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+        ItemMeta glassMeta = blackGlassPane.getItemMeta();
+        glassMeta.setDisplayName(" ");
+        blackGlassPane.setItemMeta(glassMeta);
+
+        for (int i = 0; i < inv.getSize(); i++) {
+            if (inv.getItem(i) == null) {
+                inv.setItem(i, blackGlassPane);
+            }
+        }
 
         player.openInventory(inv);
     }

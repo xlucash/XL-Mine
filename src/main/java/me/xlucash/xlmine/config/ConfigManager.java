@@ -14,10 +14,12 @@ public class ConfigManager {
 
     public void loadConfig() {
         plugin.saveDefaultConfig();
+        config = plugin.getConfig();
     }
 
     public void reloadConfig() {
         plugin.reloadConfig();
+        config = plugin.getConfig();
     }
 
     public String getWorldName() {

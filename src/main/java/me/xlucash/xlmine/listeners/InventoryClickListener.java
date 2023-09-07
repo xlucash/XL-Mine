@@ -27,7 +27,7 @@ public class InventoryClickListener implements Listener {
 
         String title = event.getView().getTitle();
 
-        if (!(title.equals("Plecak z weglem") || title.equals("Potwierdzenie sprzedazy"))) return;
+        if (!(title.equals("§fPlecak gornika") || title.equals("§fPotwierdzenie sprzedazy"))) return;
 
         event.setCancelled(true);
 
@@ -35,7 +35,7 @@ public class InventoryClickListener implements Listener {
             return;
         }
 
-        if (title.equals("Plecak z weglem")) {
+        if (title.equals("§fPlecak gornika")) {
             if (event.getCurrentItem() != null && event.getCurrentItem().getType() == Material.GOLD_INGOT) {
                 Player player = (Player) event.getWhoClicked();
                 int coalAmount = databaseManager.getCoalAmount(player.getUniqueId());
@@ -45,7 +45,7 @@ public class InventoryClickListener implements Listener {
                 }
                 ConfirmationGUI.openFor((Player) event.getWhoClicked());
             }
-        } else if (title.equals("Potwierdzenie sprzedazy")) {
+        } else if (title.equals("§fPotwierdzenie sprzedazy")) {
             if (event.getCurrentItem() != null) {
                 if (event.getCurrentItem().getType() == Material.GREEN_WOOL) {
                     Player player = (Player) event.getWhoClicked();
@@ -56,7 +56,7 @@ public class InventoryClickListener implements Listener {
                     if (VaultHook.econ != null) {
                         VaultHook.econ.depositPlayer(player, totalPrice);
                         databaseManager.setCoalAmount(player.getUniqueId(), 0);
-                        player.sendMessage("Sprzedałeś swój węgiel za " + totalPrice + "$!");
+                        player.sendMessage("§7Sprzedałeś zawartość plecaka za §a" + totalPrice + "$!");
                     }
 
                     player.closeInventory();
@@ -69,7 +69,7 @@ public class InventoryClickListener implements Listener {
 
     @EventHandler
     public void onInventoryExit(InventoryCloseEvent event) {
-        if (event.getView().getTitle().equals("Plecak z weglem") || event.getView().getTitle().equals("Potwierdzenie sprzedazy")) {
+        if (event.getView().getTitle().equals("§fPlecak gornika") || event.getView().getTitle().equals("§fPotwierdzenie sprzedazy")) {
             BackpackGUI backpackGUI = new BackpackGUI(databaseManager, configManager);
             backpackGUI.close();
         }
