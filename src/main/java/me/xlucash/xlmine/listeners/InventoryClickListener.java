@@ -70,8 +70,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onInventoryExit(InventoryCloseEvent event) {
         if (event.getView().getTitle().equals("§fPlecak gornika") || event.getView().getTitle().equals("§fPotwierdzenie sprzedazy")) {
-            BackpackGUI backpackGUI = new BackpackGUI(databaseManager, configManager);
-            backpackGUI.close();
+            BackpackGUI.close();
         }
     }
 }

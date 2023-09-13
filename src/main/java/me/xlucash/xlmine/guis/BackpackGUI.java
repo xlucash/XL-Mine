@@ -3,7 +3,6 @@ package me.xlucash.xlmine.guis;
 import me.xlucash.xlmine.MineMain;
 import me.xlucash.xlmine.config.ConfigManager;
 import me.xlucash.xlmine.database.DatabaseManager;
-import me.xlucash.xlmine.hooks.VaultHook;
 import me.xlucash.xlmine.utils.CoalPriceManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 public class BackpackGUI {
     private final DatabaseManager databaseManager;
     private final ConfigManager configManager;
-    private BukkitTask refreshTask;
+    private static BukkitTask refreshTask;
     private Inventory inv;
     private Player currentPlayer;
     private static final DecimalFormat df = new DecimalFormat("0.000");
@@ -39,7 +38,7 @@ public class BackpackGUI {
         refreshTask = Bukkit.getScheduler().runTaskTimer(MineMain.getPlugin(MineMain.class), this::refreshGUI, 0L, 20L); // co sekundę
     }
 
-    public void close() {
+    public static void close() {
         if (refreshTask != null) {
             refreshTask.cancel();
         }
