@@ -7,6 +7,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Statistic;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -53,6 +54,8 @@ public class BlockBreakListener implements Listener {
             } else {
                 event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§cTwój plecak jest pełen! Sprzedaj jego zawartość, aby kopać dalej!"));
             }
+
+            event.getPlayer().incrementStatistic(Statistic.MINE_BLOCK, Material.BEDROCK, 1);
 
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 event.getBlock().setType(Material.COAL_ORE);
