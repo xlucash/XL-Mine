@@ -13,9 +13,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
+import java.text.DecimalFormat;
+
 public class InventoryClickListener implements Listener {
     private final DatabaseManager databaseManager;
     private ConfigManager configManager;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public InventoryClickListener(DatabaseManager databaseManager, ConfigManager configManager) {
         this.databaseManager = databaseManager;
@@ -56,7 +59,7 @@ public class InventoryClickListener implements Listener {
                     if (VaultHook.econ != null) {
                         VaultHook.econ.depositPlayer(player, totalPrice);
                         databaseManager.setCoalAmount(player.getUniqueId(), 0);
-                        player.sendMessage("§7Sprzedałeś zawartość plecaka za §a" + totalPrice + "$!");
+                        player.sendMessage("§7Sprzedałeś zawartość plecaka za §a" + df.format(totalPrice) + "$!");
                     }
 
                     player.closeInventory();
