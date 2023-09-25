@@ -29,6 +29,10 @@ public class CoalPriceManager {
         double max = configManager.getMaxCoalPrice();
         currentPrice = Double.parseDouble(df.format(new Random().nextDouble(min, max)));
         databaseManager.setCoalPrice(currentPrice);
+        Bukkit.broadcastMessage(" ");
+        Bukkit.broadcastMessage("           §m      §7[ §8§lKOPALNIA §7]§7§m     ");
+        Bukkit.broadcastMessage("       §7Nowa cena wegla: §a" + currentPrice + "$§7/kg.");
+        Bukkit.broadcastMessage(" ");
     }
 
     public static double getCurrentPrice() {
