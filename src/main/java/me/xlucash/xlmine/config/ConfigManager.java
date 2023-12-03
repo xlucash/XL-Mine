@@ -69,4 +69,8 @@ public class ConfigManager {
     public int getMaxCoalPrice() {
         return config.getInt("coal-price.max");
     }
+    public String getGoalCommand() {
+        return config.getString("event-goal-command");
+    }
+    public int getCoalGoal() { return config.getInt("event-goal-coal"); }
 }

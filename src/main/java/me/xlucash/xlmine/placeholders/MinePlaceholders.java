@@ -51,6 +51,10 @@ public class MinePlaceholders extends PlaceholderExpansion {
             return df.format((double) plugin.getDatabaseManager().getCoalAmount(player.getUniqueId())/1000)+"kg";
         }
 
+        // %xlmine_event_fill%
+        if (identifier.equals("event_fill")) {
+            return df.format((double) plugin.getDatabaseManager().getEventCoalAmount()/1000)+"kg";
+        }
         return null;
     }
 }

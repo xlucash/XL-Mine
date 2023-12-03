@@ -6,10 +6,11 @@ commands:
   gornik:
     description: Gornik plugin
     usage: /<command> [reload]
+  mikolaj:
+    description: Otworz menu eventowe
 permissions:
   mine.reload:
       description: Uprawnienie do przeladowania pluginu.
       default: op
 depend:
-  - SuperiorSkyblock2
   - PlaceholderAPI

@@ -6,6 +6,8 @@ coal-amount:
 coal-price:
   min: 5
   max: 15
+event-goal-command: "broadcast piec mikolaja jest pelen!"
+event-goal-coal: 1000
 
 database:
   type: 'SQLite'

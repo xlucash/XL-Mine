@@ -27,11 +27,15 @@ public class CoalPriceManager {
     public void updatePrice() {
         double min = configManager.getMinCoalPrice();
         double max = configManager.getMaxCoalPrice();
-        currentPrice = Double.parseDouble(df.format(new Random().nextDouble(min, max)));
+        double randomPrice = new Random().nextDouble(min, max);
+
+        currentPrice = randomPrice;
+        String formattedPrice = df.format(currentPrice);
+
         databaseManager.setCoalPrice(currentPrice);
         Bukkit.broadcastMessage(" ");
         Bukkit.broadcastMessage("           §m      §7[ §8§lKOPALNIA §7]§7§m     ");
-        Bukkit.broadcastMessage("       §7Nowa cena wegla: §a" + currentPrice + "$§7/kg.");
+        Bukkit.broadcastMessage("       §7Nowa cena wegla: §a" + formattedPrice + "$§7/kg.");
         Bukkit.broadcastMessage(" ");
     }
 

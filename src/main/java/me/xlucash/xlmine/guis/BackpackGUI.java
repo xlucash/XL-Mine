@@ -65,7 +65,7 @@ public class BackpackGUI {
             sellMeta.setDisplayName("§6Sprzedaj węgiel");
             double pricePerKg = CoalPriceManager.getCurrentPrice();
             double totalPrice = coalAmount / 1000.0 * pricePerKg;
-            sellMeta.setLore(Arrays.asList(" ", "§fCena za kg: §6" + CoalPriceManager.getCurrentPrice() + "$", "§fCałkowita cena: §a" + df.format(totalPrice) + "$", " ", "§fNastępna aktualizacja za: §e" + CoalPriceManager.getTimeUntilNextUpdate(), " "));
+            sellMeta.setLore(Arrays.asList(" ", "§fCena za kg: §6" + df.format(CoalPriceManager.getCurrentPrice()) + "$", "§fCałkowita cena: §a" + df.format(totalPrice) + "$", " ", "§fNastępna aktualizacja za: §e" + CoalPriceManager.getTimeUntilNextUpdate(), " "));
             sellButton.setItemMeta(sellMeta);
         }
 

@@ -30,6 +30,7 @@ public class DatabaseManager {
         try (Connection connection = database.getConnection(); Statement statement = connection.createStatement()) {
             statement.execute("CREATE TABLE IF NOT EXISTS miners (uuid VARCHAR(36) PRIMARY KEY, coal INT, lastSold TIMESTAMP)");
                 statement.execute("CREATE TABLE IF NOT EXISTS coal_price (price DOUBLE)");
+                statement.execute("CREATE TABLE IF NOT EXISTS coal_event (coal INT)");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -136,5 +137,55 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean addCoalToEventBackpack(int amount) {
+        try (Connection connection = database.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT coal FROM coal_event")) {
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int currentCoal = resultSet.getInt("coal");
+
+                if (currentCoal >= configManager.getCoalGoal()) {
+                    return false;
+                }
+
+                if (currentCoal + amount > configManager.getCoalGoal()) {
+                    return false;
+                }
+
+                int newCoalAmount = Math.min(currentCoal + amount, configManager.getCoalGoal());
+
+                try (PreparedStatement updateStatement = connection.prepareStatement("UPDATE coal_event SET coal = ?")) {
+                    updateStatement.setInt(1, newCoalAmount);
+                    updateStatement.executeUpdate();
+                }
+            } else {
+                int newCoalAmount = Math.min(amount, configManager.getCoalGoal());
+
+                try (PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO coal_event (coal) VALUES (?)")) {
+                    insertStatement.setInt(1, newCoalAmount);
+                    insertStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    public int getEventCoalAmount() {
+        try (Connection connection = database.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT coal FROM coal_event LIMIT 1")) {
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("coal");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

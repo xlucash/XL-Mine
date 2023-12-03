@@ -1,5 +1,6 @@
 package me.xlucash.xlmine;
 
+import me.xlucash.xlmine.commands.EventCommand;
 import me.xlucash.xlmine.commands.MineCommand;
 import me.xlucash.xlmine.config.ConfigManager;
 import me.xlucash.xlmine.database.DatabaseManager;
@@ -40,6 +41,7 @@ public final class MineMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryClickListener(databaseManager, configManager), this);
 
         getCommand("gornik").setExecutor(new MineCommand(databaseManager, configManager));
+        getCommand("mikolaj").setExecutor(new EventCommand(databaseManager, configManager));
     }
 
     @Override

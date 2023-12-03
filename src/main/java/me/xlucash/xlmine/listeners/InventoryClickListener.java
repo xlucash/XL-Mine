@@ -30,7 +30,7 @@ public class InventoryClickListener implements Listener {
 
         String title = event.getView().getTitle();
 
-        if (!(title.equals("§fPlecak gornika") || title.equals("§fPotwierdzenie sprzedazy"))) return;
+        if (!(title.equals("§fPlecak gornika") || title.equals("§fPotwierdzenie sprzedazy") || title.equals("§fPiec mikolaja"))) return;
 
         event.setCancelled(true);
 
