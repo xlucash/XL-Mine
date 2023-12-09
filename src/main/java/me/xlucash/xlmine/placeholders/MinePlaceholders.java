@@ -38,7 +38,7 @@ public class MinePlaceholders extends PlaceholderExpansion {
 
         // %xlmine_price%
         if (identifier.equals("price")) {
-            return CoalPriceManager.getCurrentPrice()+"$";
+            return df.format(CoalPriceManager.getCurrentPrice())+"$";
         }
 
         // %xlmine_backpack_capacity%

@@ -29,7 +29,7 @@ public class EventGUI {
                             " ",
                             "§7Zapełnienie: §a" + (double) databaseManager.getEventCoalAmount()/1000 + "kg",
                             " ",
-                            "§7Zbierzcie siły i pomóżcie §cMikołajowi §7uzbierać §a250 000 §7kilogramów węgla.",
+                            "§7Zbierzcie siły i pomóżcie §cMikołajowi §7uzbierać §a50 000 §7kilogramów węgla.",
                             "§7Jeżeli §aWam §7się uda to §6cały serwer §7zostanie nagrodzony specjalną nagrodą.",
                             "§7Dostępną pod §6/prezent",
                             " ",
